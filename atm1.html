@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATM Machine - Apoorva</title>
+    
+    <!-- Viewport meta tag for mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background: #cfd8dc;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .atm-box {
+            width: 360px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .screen {
+            background: black;
+            color: #00ff00;
+            font-size: 16px;
+            padding: 15px;
+            min-height: 60px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid gray;
+        }
+
+        button {
+            background: #0066cc;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #004999;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="atm-box">
+
+    <h2>Apoorva ATM Project</h2>
+
+    <div class="screen" id="screen">Enter card name</div>
+
+    <input type="text" id="cardName" placeholder="Card name: apoorva / appu">
+    <button onclick="checkCard()">Submit Card</button>
+
+    <input type="password" id="password" placeholder="Enter password" style="display:none;">
+    <button id="passwordBtn" onclick="checkPassword()" style="display:none;">Submit Password</button>
+
+    <div id="options" style="display:none;">
+        <button onclick="checkBalance()">Balance Check</button>
+        <button onclick="showWithdraw()">Withdraw</button>
+    </div>
+
+    <div id="withdrawBox" style="display:none;">
+        <input type="number" id="amount" placeholder="Enter amount">
+        <button onclick="withdraw()">Confirm Withdraw</button>
+    </div>
+
+</div>
+
+<script>
+    // Python logic converted to JS
+    let account = 100000;
+    let account1 = 150000;
+
+    let pwd = 1234;
+    let pwd2 = 234;
+
+    let card_name = "apoorva";
+    let card_name1 = "appu";
+
+    let selected = "";
+
+    function checkCard() {
+        let c = document.getElementById("cardName").value;
+
+        if (c === card_name || c === card_name1) {
+            selected = c;
+            document.getElementById("screen").innerHTML = "Welcome " + c;
+
+            document.getElementById("password").style.display = "block";
+            document.getElementById("passwordBtn").style.display = "block";
+        } 
+        else {
+            document.getElementById("screen").innerHTML = "Enter correct card name!";
+        }
+    }
+
+    function checkPassword() {
+        let p = parseInt(document.getElementById("password").value);
+
+        if ((selected === card_name && p === pwd) ||
+            (selected === card_name1 && p === pwd2)) {
+
+            document.getElementById("screen").innerHTML = "Choose an option below";
+            document.getElementById("options").style.display = "block";
+        } 
+        else {
+            document.getElementById("screen").innerHTML = "Please enter valid password";
+        }
+    }
+
+    function checkBalance() {
+        if (selected === card_name) {
+            document.getElementById("screen").innerHTML = "Your balance: " + account;
+        } else {
+            document.getElementById("screen").innerHTML = "Your balance: " + account1;
+        }
+    }
+
+    function showWithdraw() {
+        document.getElementById("withdrawBox").style.display = "block";
+    }
+
+    function withdraw() {
+        let amt = parseInt(document.getElementById("amount").value);
+
+        if (selected === card_name) {
+            if (amt <= account) {
+                account -= amt;
+                document.getElementById("screen").innerHTML = "Remaining: " + account;
+            } else {
+                document.getElementById("screen").innerHTML = "Insufficient balance!";
+            }
+        }
+
+        if (selected === card_name1) {
+            if (amt <= account1) {
+                account1 -= amt;
+                document.getElementById("screen").innerHTML = "Remaining: " + account1;
+            } else {
+                document.getElementById("screen").innerHTML = "Insufficient balance!";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
