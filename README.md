@@ -13,4 +13,4 @@ A simple and interactive ATM simulator built using HTML, CSS, and JavaScript. Us
 HTML | CSS | JavaScript
 
 ## Try it Live
-[Click here to try the project](https://github.com/apoorva-venkata/atm_mini_project)
+[Click here to try the project](https://github.com/apoorva-venkata/atm_mini_project/blob/main/atm1.html)
